@@ -2,7 +2,7 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import routes from './app/routes';
+import routes from './app/routes/index';
 
 import cookieParser from 'cookie-parser';
 
@@ -17,9 +17,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 
-
 //global error handler
 app.use(globalErrorHandler);
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: 'success',
+  });
+});
 
 //handle not found
 app.use((req: Request, res: Response, next: NextFunction) => {
