@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\successes\\.8c7a929bc4b68a72c7677be123ce460ae893f604-audit.json",
+    "files": [
+        {
+            "date": 1699682344167,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\successes\\phu-2023-11-11-11-success.log",
+            "hash": "e9649e42a6719f6f60839583ae1e0a19d69eedc9f71e1f675378c41f70072124"
+        },
+        {
+            "date": 1699682452695,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\successes\\phu-2023-11-11-12-success.log",
+            "hash": "2aa1f0f83c1f9aa0aa89273638c0a5f91e8f412c8401726d7586d8e068d537b1"
+        },
+        {
+            "date": 1699686072206,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\successes\\phu-2023-11-11-13-success.log",
+            "hash": "c6f27f4e135265f252db458421e58d7c17dde0548ed5e0a805b6929ccc4134e8"
+        },
+        {
+            "date": 1699700699468,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\successes\\phu-2023-11-11-17-success.log",
+            "hash": "64460f00f27bc9219184a4cf5cff51488f211564cfe1b32d40310af91607877c"
+        }
+    ],
+    "hashType": "sha256"
+}
