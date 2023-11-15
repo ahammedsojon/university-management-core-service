@@ -22,9 +22,6 @@ const getAllAcademicSemesters = async (
 ): Promise<IGenericResponse<AcademicSemester[]>> => {
   const { page, limit, skip } = paginationHelpers.calculatePagination(options);
   const { searchTerm, ...filtersData } = filters;
-  console.log('====================================');
-  console.log(searchTerm, filtersData);
-  console.log('====================================');
   const andConditions = [];
 
   if (searchTerm) {
@@ -52,6 +49,14 @@ const getAllAcademicSemesters = async (
     skip,
     take: limit,
     where: whereConditions,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: 'desc',
+          },
   });
   const total = await prisma.academicSemester.count();
   return {
@@ -64,7 +69,45 @@ const getAllAcademicSemesters = async (
   };
 };
 
+const getSingleAcademicSemester = async (
+  id: string
+): Promise<AcademicSemester | null> => {
+  const result = await prisma.academicSemester.findUnique({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+
+const updateAcademicSemester = async (
+  id: string,
+  data: Partial<AcademicSemester>
+): Promise<AcademicSemester | null> => {
+  const result = await prisma.academicSemester.update({
+    where: {
+      id,
+    },
+    data,
+  });
+  return result;
+};
+
+const deleteAcademicSemester = async (
+  id: string
+): Promise<AcademicSemester | null> => {
+  const result = await prisma.academicSemester.delete({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllAcademicSemesters,
+  getSingleAcademicSemester,
+  updateAcademicSemester,
+  deleteAcademicSemester,
 };
