@@ -1,11 +1,11 @@
+import { CourseFaculty, Faculty } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { FacultyService } from './faculty.service';
 import { facultyFilterAbleFields } from './faculty.constant';
-import { Faculty } from '@prisma/client';
+import { FacultyService } from './faculty.service';
 
 const create = catchAsync(async (req: Request, res: Response) => {
   const { ...facultyData } = req.body;
@@ -63,10 +63,38 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const assignCourses = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { courses } = req.body;
+
+  const result = await FacultyService.assignCourses(id, courses);
+  sendResponse<CourseFaculty[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Courses assigned to faculty successfully!',
+    data: result,
+  });
+});
+
+const removeCourses = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { courses } = req.body;
+
+  const result = await FacultyService.removeCourses(id, courses);
+  sendResponse<CourseFaculty[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Courses removed from faculty successfully!',
+    data: result,
+  });
+});
+
 export const FacultyController = {
   create,
   getAll,
   getSingle,
   update,
   deleteFromDB,
+  assignCourses,
+  removeCourses,
 };
