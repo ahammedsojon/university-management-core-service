@@ -2,6 +2,7 @@ import {
   PrismaClient,
   SemesterRegistration,
   SemesterRegistrationStatus,
+  StudentSemesterRegistration,
 } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
@@ -84,4 +85,57 @@ const update = async (
   return result;
 };
 
-export const SemesterRegistrationService = { create, update };
+const startMyRegistration = async (
+  authId: string
+): Promise<StudentSemesterRegistration> => {
+  const studentInfo = await prisma.student.findFirst({
+    where: {
+      studentId: authId,
+    },
+  });
+  if (!studentInfo) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Student not found!');
+  }
+
+  const semesterInfo = await prisma.semesterRegistration.findFirst({
+    where: {
+      status: {
+        in: [
+          SemesterRegistrationStatus.ONGOING,
+          SemesterRegistrationStatus.UPCOMING,
+        ],
+      },
+    },
+  });
+  if (
+    semesterInfo &&
+    semesterInfo?.status === SemesterRegistrationStatus.UPCOMING
+  ) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      'Semseter registration has not started yet.'
+    );
+  }
+
+  const result = await prisma.studentSemesterRegistration.create({
+    data: {
+      student: {
+        connect: {
+          id: studentInfo?.id,
+        },
+      },
+      semesterRegistration: {
+        connect: {
+          id: semesterInfo?.id,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+export const SemesterRegistrationService = {
+  create,
+  update,
+  startMyRegistration,
+};

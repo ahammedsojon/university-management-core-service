@@ -6,26 +6,6 @@
     "auditLog": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\.c9a175481b605de4e0649af0fb3d263b6134728c-audit.json",
     "files": [
         {
-            "date": 1699682344173,
-            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-11-11-11-error.log",
-            "hash": "180bcbe80e32135c1058b5b4006cd21ed96dca827aa77ee37ead4bf9d6cd94be"
-        },
-        {
-            "date": 1699682452701,
-            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-11-11-12-error.log",
-            "hash": "d45247e9883ab72ec0eabf36ea0afec9b2e47acabeca7def538f8328251826fd"
-        },
-        {
-            "date": 1699686072215,
-            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-11-11-13-error.log",
-            "hash": "b0beb0012a907bd444272e53fa64c5b2e4e482362eab35517cde3abe0a8b7784"
-        },
-        {
-            "date": 1699700699479,
-            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-11-11-17-error.log",
-            "hash": "0ee91323130143a6496f891380c7894ad139e35c3d2a887615c1c4620f357e32"
-        },
-        {
             "date": 1699921033377,
             "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-14-11-06-error.log",
             "hash": "f6814e49b61a54c36258888a6267e0840476d93bb30d24aae43838e11d496be1"
@@ -79,6 +59,26 @@
             "date": 1700377426607,
             "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-19-11-13-error.log",
             "hash": "a19397bd25af1bff78af9f1d3cf0cfa462b4b3e8cfe6c3e055630eb5eccf8c9c"
+        },
+        {
+            "date": 1700978920780,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-26-11-12-error.log",
+            "hash": "259fa7022aa87b2856f70faffa839f26b8e663c77da3c1a5e879f8b7a4bcc2c2"
+        },
+        {
+            "date": 1701001163606,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-26-11-18-error.log",
+            "hash": "d6206a4ed86ab0ec02304e76ff9c5d37d5be0d2e86c540c325c7b55d06278a13"
+        },
+        {
+            "date": 1701004089168,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-26-11-19-error.log",
+            "hash": "e5ba31c261c95d2924933fc23e116da9e881939103058c4fe208da7725dbe6f3"
+        },
+        {
+            "date": 1701090365446,
+            "name": "H:\\PHL2\\PostgreSQL\\university-management-core-service\\logs\\winston\\errors\\phu-2023-27-11-19-error.log",
+            "hash": "5922688e980959ee6fd65cff7a31952b7c9eec53726dd2e36f456ef7fc61ea11"
         }
     ],
     "hashType": "sha256"

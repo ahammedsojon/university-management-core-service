@@ -1,4 +1,7 @@
-import { SemesterRegistration } from '@prisma/client';
+import {
+  SemesterRegistration,
+  StudentSemesterRegistration,
+} from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
@@ -28,4 +31,19 @@ const update = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const SemesterRegistrationController = { create, update };
+const startMyRegistration = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user || {};
+  const result = await SemesterRegistrationService.startMyRegistration(userId);
+  sendResponse<StudentSemesterRegistration>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student semester registraion has been created successfully!',
+    data: result,
+  });
+});
+
+export const SemesterRegistrationController = {
+  create,
+  update,
+  startMyRegistration,
+};
