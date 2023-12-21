@@ -174,7 +174,7 @@ model SemesterRegistration {
 
 model StudentSemesterRegistration {
   id                     String               @id @default(uuid())
-  isConfirmed            Boolean?
+  isConfirmed            Boolean? @default(false)
   totalCreditsTaken      Int? @default(0)
   createdAt              DateTime             @default(now())
   updatedAt              DateTime             @updatedAt

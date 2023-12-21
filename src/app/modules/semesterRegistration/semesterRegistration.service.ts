@@ -87,7 +87,10 @@ const update = async (
 
 const startMyRegistration = async (
   authId: string
-): Promise<StudentSemesterRegistration> => {
+): Promise<{
+  semseterRegistration: SemesterRegistration | null;
+  studentSemesterRegistration: StudentSemesterRegistration | null;
+}> => {
   const studentInfo = await prisma.student.findFirst({
     where: {
       studentId: authId,
@@ -117,22 +120,39 @@ const startMyRegistration = async (
     );
   }
 
-  const result = await prisma.studentSemesterRegistration.create({
-    data: {
-      student: {
-        connect: {
-          id: studentInfo?.id,
+  let result = await prisma.studentSemesterRegistration.findFirst({
+    where: {
+      AND: [
+        {
+          studentId: studentInfo?.id,
         },
-      },
-      semesterRegistration: {
-        connect: {
-          id: semesterInfo?.id,
+        {
+          semesterRegistrationId: semesterInfo?.id,
         },
-      },
+      ],
     },
   });
+  if (!result) {
+    result = await prisma.studentSemesterRegistration.create({
+      data: {
+        student: {
+          connect: {
+            id: studentInfo?.id,
+          },
+        },
+        semesterRegistration: {
+          connect: {
+            id: semesterInfo?.id,
+          },
+        },
+      },
+    });
+  }
 
-  return result;
+  return {
+    semseterRegistration: semesterInfo,
+    studentSemesterRegistration: result,
+  };
 };
 export const SemesterRegistrationService = {
   create,
