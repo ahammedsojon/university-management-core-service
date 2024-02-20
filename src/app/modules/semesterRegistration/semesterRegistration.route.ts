@@ -18,4 +18,10 @@ router.post(
 );
 router.patch('/:id', SemesterRegistrationController.update);
 
+router.post(
+  '/enroll-into-course',
+  auth(ENUM_USER_ROLE.STUDENT),
+  SemesterRegistrationController.enrollIntoCourse
+);
+
 export const SemesterRegistrationRoute = router;
