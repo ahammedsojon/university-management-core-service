@@ -6,7 +6,10 @@ import {
 } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { ISemesterRegistration } from './semesterRegistration.interface';
+import {
+  IEnrollCourse,
+  ISemesterRegistration,
+} from './semesterRegistration.interface';
 
 const prisma = new PrismaClient();
 
@@ -154,8 +157,46 @@ const startMyRegistration = async (
     studentSemesterRegistration: result,
   };
 };
+
+const enrollCourse = async (authUserId: string, payload: IEnrollCourse) => {
+  const student = await prisma.student.findFirst({
+    where: {
+      studentId: authUserId,
+    },
+  });
+
+  if (!student) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User not found!');
+  }
+
+  const semesterRegistration = await semesterRegistration.findFirst({
+    where: {
+      status: SemesterRegistrationStatus.ONGOING,
+    },
+  });
+
+  if (!semesterRegistration) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      'No semester registration is currently ongoing!'
+    );
+  }
+
+  const result = await prisma.studentSemesterRegistrationCourse.create({
+    data: {
+      studentId: student?.id,
+      semesterRegsitrationId: semesterRegistration?.id,
+      offeredCourseId: payload.offeredCourseId,
+      offeredCourseSectoinId: payload.offeredCourseSectionId,
+    },
+  });
+
+  return result;
+};
+
 export const SemesterRegistrationService = {
   create,
   update,
   startMyRegistration,
+  enrollCourse,
 };

@@ -6,3 +6,8 @@ export type ISemesterRegistration = {
   maxDate: number;
   academicSemesterId: string;
 };
+
+export type IEnrollCourse = {
+  offeredCourseId: string;
+  offeredCourseSectionId: string;
+};
