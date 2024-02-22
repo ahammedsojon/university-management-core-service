@@ -208,6 +208,7 @@ model OfferedCourseSection {
   id                                String                              @id @default(uuid())
   title                             String
   maxCapacity                       Int
+  currentlyEnrollStudent  Int @default(0)
   offeredCourseId                   String
   offeredCourse                     OfferedCourse                       @relation(fields: [offeredCourseId], references: [id])
   semesterRegistrationId            String
@@ -240,8 +241,8 @@ model OfferedCourseClassSchedule {
 }
 
 model StudentSemesterRegistrationCourse {
-  semesterRegsitrationId String
-  semesterRegistration   SemesterRegistration @relation(fields: [semesterRegsitrationId], references: [id])
+  semesterRegistrationId String
+  semesterRegistration   SemesterRegistration @relation(fields: [semesterRegistrationId], references: [id])
   studentId              String
   student                Student              @relation(fields: [studentId], references: [id])
   offeredCourseId        String
@@ -251,7 +252,7 @@ model StudentSemesterRegistrationCourse {
   createdAt              DateTime             @default(now())
   updatedAt              DateTime             @updatedAt
 
-  @@id([semesterRegsitrationId, studentId, offeredCourseSectoinId])
+  @@id([semesterRegistrationId, studentId, offeredCourseId])
   @@map("student_semester_registration_courses")
 }
 
